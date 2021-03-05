@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<#include '/fragment/header.html' />
+<div class="page_newc">
+    <div class="page_newct"> ${title!}</div>
+    <div class="page_newcd"> 发布时间：2021/02/26&nbsp;&nbsp;<!--点击率：1926--></div>
+    <div class="page_newctxt mce-content-body">
+        ${text!}
+    </div>
+    <div class="page_newclink">
+      	<@nextPrevious id=id categoryId=categoryId>
+          <#if previous??>
+        上一篇：<a href='${previous.url!}'>${sub((previous.title)!,20,'..')}</a><br>
+            <#else>
+        上一篇：没有啦~
+              </#if>
+            <#if next??>
+        下一篇：<a href='${next.url!}'>${sub((next.title)!,20,'..')}</a></div>
+            <#else>
+              下一篇：没有啦~
+              </#if>
+        </@nextPrevious>
+</div>
+<div class="index_line"></div>
+<#include import('hotline')/>
+<#include '/fragment/footer_button.html' />
+<#include '/fragment/javaScript.html' />
+</body>
+</html>

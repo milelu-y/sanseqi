@@ -1,0 +1,44 @@
+<div class="banner">
+    <div class="fullSlide">
+        <div class="bd">
+          <@fdata code="banner">
+            <#if datas?? && (datas?size>0)>
+            <ul>
+              <#list datas as data>
+                <li style="background-image:url(${(data.cover.url)!}); 
+                           background-color:#FFF; background-size:auto 100%; 
+                           background-position:left center; 
+                           background-repeat:no-repeat">
+                    <a target="_blank" href="#"></a>
+                </li>
+                </#list>
+            </ul>
+              </#if>
+           </@fdata>
+        </div>
+        <div class="hd">
+            <ul>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+            </ul>
+        </div>
+    </div>
+    <script type="text/javascript">
+        jQuery(".fullSlide").hover(function () {
+            jQuery(this).find(".prev,.next").stop(true, true).fadeTo("show", 1)
+        }, function () {
+            jQuery(this).find(".prev,.next").fadeOut()
+        });
+        jQuery(".fullSlide").slide({
+            titCell: ".hd ul", mainCell: ".bd ul", effect: "fold", autoPlay: true, autoPage: true, trigger: "click",
+            startFun: function (i) {
+                var curLi = jQuery(".fullSlide .bd li").eq(i);
+                if (!!curLi.attr("_src")) {
+                    curLi.css("background-image", curLi.attr("_src")).removeAttr("_src")
+                }
+            }
+        });
+    </script>
+</div>

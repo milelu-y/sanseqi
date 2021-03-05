@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<#include '/fragment/header.html'/>
+<div class="page_title"> 行业资讯</div>
+<div class="index_list2">
+  <#list contents as content>
+    <div class="index_list2i">
+        <div class="index_list2it"><a href="${content.url!}">${content.title!}</a></div>
+        <div class="index_list2ip"><a href="${content.url!}"><img <#if content.cover??>src="${content.cover.url!}"</#if>/></a></div>
+        <div class="index_list2itxt">
+            <div class="index_list2ii">
+              ${sub(content.description!,158,'…')}
+            </div>
+            <div class="index_list2ib"><span><img src="/static/images/listicon10.png"/>${(publishDate?string('YYYY-MM-dd'))!'${.now?string("YYYY-MM-dd")}'}</span>
+              <!--<span><img src="images/listicon11.png"/>1926</span>-->
+          </div>
+        </div>
+    </div>
+    </#list>
+</div>
+<#include "/fragment/page.html"/>
+<div class="index_line"></div>
+<#include import('hotline')/>
+<#include '/fragment/footer_button.html'/>
+<#include '/fragment/javaScript.html'/>
+</body>
+</html>

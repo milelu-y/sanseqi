@@ -1,0 +1,38 @@
+<div class="index_botnav">
+        <div class="index_botnavi">
+            <div class="index_botnavic">
+                <div class="index_botnav01"><a href="/" id="index_botnav01on">首页</a></div>
+            </div>
+        </div>
+        <div class="index_botnavi">
+            <div class="index_botnavic">
+                <div class="index_botnav02"><a href="ceshi.html">测试</a></div>
+            </div>
+        </div>
+        <div class="index_botnavi">
+            <div class="index_botnavic">
+                <div class="index_botnav03"><a href="news.html">资讯</a></div>
+            </div>
+        </div>
+        <div class="index_botnavi">
+            <div class="index_botnavic">
+                <div class="index_botnav04"><a href="about.html">关于</a></div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div style="display:none" id="antzone">
+      	<@navbar>
+        <div class="dg_navwap">
+          <#if bars?? && (bars?size>0)>
+           <#list bars as bar>
+            <div class="dg_nav_itemwap">
+              <a ${bar.onlyUrl ? string('href=${bar.remoteUrl!}','href=${bar.path!}')}>${bar.name!}</a>
+            </div>
+           </#list>
+		  </#if>
+        </div>
+        </@navbar>
+        <div class="close_btn"><img src="/static/images/nav_close.png"/></div>
+    </div>

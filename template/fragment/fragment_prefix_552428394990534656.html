@@ -1,0 +1,17 @@
+<div class="index_list3">
+    <div class="index_bottel"> 咨询热线<br>
+        <span><a href="tel:0731 8080 6060">0731 8080 6060</a></span></div>
+    <div class="index_botcode">
+       <@fdata code="hotline">
+           <#if datas?? && (datas?size>0)>
+              <#list datas as data>
+                  <img src="${(data.cover.url)!}" title="${(data.title)!}"/>
+               </#list>
+            </#if>
+        </@fdata>
+    </div>
+    <div class="index_botcopy">Copyright © 2021夏之阳网络科技 版权所有<br>
+        湘ICP备123456789号
+    </div>
+    <div class="index_botspace"></div>
+</div>

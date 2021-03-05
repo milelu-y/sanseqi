@@ -1,0 +1,241 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href="css/default.css" rel="stylesheet" type="text/css"/>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.SuperSlide.2.1.1.js"></script>
+    <title>夏之阳</title>
+</head>
+<body>
+<div class="top_nav">
+    <div class="top_navc">
+        <div class="top_tell"><a href="tel:0731 8080 6060"><img src="images/top_tell.png"/></a></div>
+        <div class="top_logo"><a href="/"><img src="images/top_logo.png"/></a></div>
+        <div class="drop-down"><img src="images/top_menu.png"/></div>
+    </div>
+</div>
+<div class="banner">
+    <div class="fullSlide">
+        <div class="bd">
+            <ul>
+                <li style="background-image:url(images/banner_1.jpg); background-color:#FFF; background-size:auto 100%; background-position:left center; background-repeat:no-repeat">
+                    <a target="_blank" href="#"></a></li>
+                <li style="background-image:url(images/banner_2.jpg); background-color:#FFF; background-size:auto 100% ; background-position:left center; background-repeat:no-repeat">
+                    <a target="_blank" href="#"></a></li>
+                <li style="background-image:url(images/banner_3.jpg); background-color:#FFF; background-size:auto 100% ; background-position:left center; background-repeat:no-repeat">
+                    <a target="_blank" href="#"></a></li>
+                <li style="background-image:url(images/banner_4.jpg); background-color:#FFF; background-size:auto 100% ; background-position:left center; background-repeat:no-repeat">
+                    <a target="_blank" href="#"></a></li>
+            </ul>
+        </div>
+        <div class="hd">
+            <ul>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+            </ul>
+        </div>
+    </div>
+    <script type="text/javascript">
+        jQuery(".fullSlide").hover(function () {
+            jQuery(this).find(".prev,.next").stop(true, true).fadeTo("show", 1)
+        }, function () {
+            jQuery(this).find(".prev,.next").fadeOut()
+        });
+        jQuery(".fullSlide").slide({
+            titCell: ".hd ul", mainCell: ".bd ul", effect: "fold", autoPlay: true, autoPage: true, trigger: "click",
+            startFun: function (i) {
+                var curLi = jQuery(".fullSlide .bd li").eq(i);
+                if (!!curLi.attr("_src")) {
+                    curLi.css("background-image", curLi.attr("_src")).removeAttr("_src")
+                }
+            }
+        });
+    </script>
+</div>
+<div class="index_title">
+    <div class="index_titlet"><span>测试类别</span>&nbsp;&nbsp;Test category</div>
+    <div class="index_titleb">自我测试，全面认清自己</div>
+</div>
+<div class="index_list">
+    <div class="index_listi">
+        <div class="index_listip"><a href="ceshi.html"><img src="images/listicon01.png"/></a></div>
+        <div class="index_listit"><a href="ceshi.html">心理测试</a></div>
+        <div class="index_listii">psychological test</div>
+    </div>
+    <div class="index_listi">
+        <div class="index_listip"><a href="ceshi.html"><img src="images/listicon02.png"/></a></div>
+        <div class="index_listit"><a href="ceshi.html">智商测试</a></div>
+        <div class="index_listii">IQ Test</div>
+    </div>
+    <div class="index_listi">
+        <div class="index_listip"><a href="ceshi.html"><img src="images/listicon03.png"/></a></div>
+        <div class="index_listit"><a href="ceshi.html">人格分类测试</a></div>
+        <div class="index_listii">Personality test</div>
+    </div>
+    <div class="index_listi">
+        <div class="index_listip"><a href="ceshi.html"><img src="images/listicon04.png"/></a></div>
+        <div class="index_listit"><a href="ceshi.html">内向程度测试</a></div>
+        <div class="index_listii">Introversion test</div>
+    </div>
+    <div class="index_listi">
+        <div class="index_listip"><a href="ceshi.html"><img src="images/listicon05.png"/></a></div>
+        <div class="index_listit"><a href="ceshi.html">情商测试</a></div>
+        <div class="index_listii">EQ Test</div>
+    </div>
+    <div class="index_listi">
+        <div class="index_listip"><a href="ceshi.html"><img src="images/listicon06.png"/></a></div>
+        <div class="index_listit"><a href="ceshi.html">社交焦虑测试</a></div>
+        <div class="index_listii">Social anxiety test</div>
+    </div>
+    <div class="index_listi">
+        <div class="index_listip"><a href="ceshi.html"><img src="images/listicon07.png"/></a></div>
+        <div class="index_listit"><a href="ceshi.html">抗挫折测试</a></div>
+        <div class="index_listii">Anti frustration test</div>
+    </div>
+    <div class="index_listi">
+        <div class="index_listip"><a href="ceshi.html"><img src="images/listicon08.png"/></a></div>
+        <div class="index_listit"><a href="ceshi.html">自律测试</a></div>
+        <div class="index_listii">Self discipline test</div>
+    </div>
+    <div class="index_listi">
+        <div class="index_listip"><a href="ceshi.html"><img src="images/listicon09.png"/></a></div>
+        <div class="index_listit"><a href="ceshi.html">恐惧情绪测试</a></div>
+        <div class="index_listii">Fear test</div>
+    </div>
+    <div class="div_clear"></div>
+</div>
+<div class="index_more"><a href="ceshi.html">更多测试</a></div>
+<div class="index_morebtn"><a href="ceshi.html"><img src="images/more_icon.png"/></a></div>
+<div class="index_line"></div>
+<div class="index_title">
+    <div class="index_titlet"><span>行业资讯</span>&nbsp;&nbsp;Industry information</div>
+    <div class="index_titleb">他山之石，可以攻玉</div>
+</div>
+<div class="index_list2">
+    <div class="index_list2i">
+        <div class="index_list2it"><a href="news_view.html">教育部新消息：部分辅导机构将迎来“寒冬”，家长能省不
+            少钱了！</a></div>
+        <div class="index_list2ip"><a href="news_view.html"><img src="images/new01.jpg"/></a></div>
+        <div class="index_list2itxt">
+            <div class="index_list2ii">中考和高考，足以改变人生方向，各个学校也是按照
+                分数，由高到低依次录取，若分数不够，很难被学校
+                录取，除非有一技之长，或在各大比赛中取得佳绩...
+            </div>
+            <div class="index_list2ib"><span><img src="images/listicon10.png"/>2021-02-22</span><span><img
+                    src="images/listicon11.png"/>1926</span></div>
+        </div>
+    </div>
+    <div class="index_list2i">
+        <div class="index_list2it"><a href="news_view.html">教育部：高校不能规定男女生录取比例，学生满足条件就能
+            高考加分</a></div>
+        <div class="index_list2ip"><a href="news_view.html"><img src="images/new02.jpg"/></a></div>
+        <div class="index_list2itxt">
+            <div class="index_list2ii">教育一直都是家长和老师关注的重点，不少家长为了
+                让孩子不输在起跑线上，都会给他们报各种各样的补
+                习班，这也是想让他们打好基础...
+            </div>
+            <div class="index_list2ib"><span><img src="images/listicon10.png"/>2021-02-22</span><span><img
+                    src="images/listicon11.png"/>1926</span></div>
+        </div>
+    </div>
+    <div class="index_list2i">
+        <div class="index_list2it"><a href="news_view.html">没了标化成绩，美国大学录取还能公平公正吗？</a></div>
+        <div class="index_list2ip"><a href="news_view.html"><img src="images/new03.jpg"/></a></div>
+        <div class="index_list2itxt">
+            <div class="index_list2ii">每天，我们几乎都能看到一篇关注高等教育公平性的
+                文章。这些文章大多使用“入学考试分数”作为分析
+                公平录取的关键指标，这就好比说考试分数高......
+            </div>
+            <div class="index_list2ib"><span><img src="images/listicon10.png"/>2021-02-22</span><span><img
+                    src="images/listicon11.png"/>1926</span></div>
+        </div>
+    </div>
+    <div class="index_list2i">
+        <div class="index_list2it"><a href="news_view.html">考研成绩即将公布，忘记准考证号如何查询，成绩会通过短
+            信推送吗</a></div>
+        <div class="index_list2ip"><a href="news_view.html"><img src="images/new04.jpg"/></a></div>
+        <div class="index_list2itxt">
+            <div class="index_list2ii">距离查询考研成绩的时间也越来越近了，各位同学只
+                需要准备好自己的身份证和准考证号等待研招网放开
+                系统就可以进行查询了...
+            </div>
+            <div class="index_list2ib"><span><img src="images/listicon10.png"/>2021-02-22</span><span><img
+                    src="images/listicon11.png"/>1926</span></div>
+        </div>
+    </div>
+</div>
+<div class="index_more"><a href="news.html">更多资讯</a></div>
+<div class="index_morebtn"><a href="news.html"><img src="images/more_icon.png"/></a></div>
+<div class="index_line"></div>
+<div class="index_list3">
+    <div class="index_bottel"> 咨询热线<br>
+        <span><a href="tel:0731 8080 6060">0731 8080 6060</a></span></div>
+    <div class="index_botcode"><img src="images/code.png"/><img src="images/code.png"/><img src="images/code.png"/>
+    </div>
+    <div class="index_botcopy">Copyright © 2021夏之阳网络科技 版权所有<br>
+        湘ICP备123456789号
+    </div>
+    <div class="index_botspace"></div>
+</div>
+<div class="index_botnav">
+    <div class="index_botnavi">
+        <div class="index_botnavic">
+            <div class="index_botnav01"><a href="/" id="index_botnav01on">首页</a></div>
+        </div>
+    </div>
+    <div class="index_botnavi">
+        <div class="index_botnavic">
+            <div class="index_botnav02"><a href="ceshi.html">测试</a></div>
+        </div>
+    </div>
+    <div class="index_botnavi">
+        <div class="index_botnavic">
+            <div class="index_botnav03"><a href="news.html">资讯</a></div>
+        </div>
+    </div>
+    <div class="index_botnavi">
+        <div class="index_botnavic">
+            <div class="index_botnav04"><a href="about.html">关于</a></div>
+        </div>
+    </div>
+</div>
+<div style="display:none" id="antzone">
+    <div class="dg_navwap">
+        <div class="dg_nav_itemwap" id="dg_nav_itemwapon"><a href="/">首页</a></div>
+        <div class="dg_nav_itemwap"><a href="about.html">关于</a></div>
+        <div class="dg_nav_itemwap"><a href="ceshi.html">测试</a></div>
+        <div class="dg_nav_itemwap"><a href="news.html">资讯</a></div>
+        <div class="dg_nav_itemwap"><a href="contact.html">联系</a></div>
+
+    </div>
+    <div class="close_btn"><img src="images/nav_close.png"/></div>
+</div>
+<script>
+    $(document).ready(function () {
+        $(".drop-down").click(function () {
+            var div = $('#antzone');
+            if (div.is(':hidden')) {
+                div.slideDown();
+            } else {
+                div.slideUp();
+            }
+        });
+
+        $(".close_btn").click(function () {
+            var div = $('#antzone');
+            if (div.is(':hidden')) {
+                div.slideDown();
+            } else {
+                div.slideUp();
+            }
+        });
+    })
+</script>
+</body>
+</html>
