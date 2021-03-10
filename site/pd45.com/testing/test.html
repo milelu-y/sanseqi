@@ -5,10 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link href="css/default.css" rel="stylesheet" type="text/css"/>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/jquery.SuperSlide.2.1.1.js"></script>
-    <script src="js/dateFormat.js"></script>
+    <link href="/static/css/default.css" rel="stylesheet" type="text/css"/>
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/jquery.SuperSlide.2.1.1.js"></script>
+    <script src="/static/js/dateFormat.js"></script>
     <title>夏之阳</title>
     <!-- 开发环境版本，包含了有帮助的命令行警告 -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -41,9 +41,9 @@
     <div class="index_topspace"></div>
     <div class="top_nav">
         <div class="top_navc">
-            <div class="top_tell"><a href="tel:0731 8080 6060"><img src="images/top_tell.png"/></a></div>
-            <div class="top_logo"><a href="/"><img src="images/top_logo.png"/></a></div>
-            <div class="drop-down"><img src="images/top_menu.png"/></div>
+            <div class="top_tell"><a href="tel:0731 8080 6060"><img src="/static/images/top_tell.png"/></a></div>
+            <div class="top_logo"><a href="/"><img src="/static/images/top_logo.png"/></a></div>
+            <div class="drop-down"><img src="/static/images/top_menu.png"/></div>
         </div>
     </div>
     <div class="page_title"> 社交焦虑测试</div>
@@ -64,7 +64,9 @@
     <div class="index_list3">
         <div class="index_bottel"> 咨询热线<br>
             <span><a href="tel:0731 8080 6060">0731 8080 6060</a></span></div>
-        <div class="index_botcode"><img src="images/code.png"/><img src="images/code.png"/><img src="images/code.png"/>
+        <div class="index_botcode">
+            <img src="http://localhost:7777/profile/upload/2021/03/05/b2c1a8e6-cf0e-420e-945a-f2bd5a701db3.png"
+                 title="二维码01"/>
         </div>
         <div class="index_botcopy">Copyright © 2021夏之阳网络科技 版权所有<br>
             湘ICP备123456789号
@@ -74,12 +76,12 @@
     <div class="index_botnav">
         <div class="index_botnavi">
             <div class="index_botnavic">
-                <div class="index_botnav01"><a href="/">首页</a></div>
+                <div class="index_botnav01"><a href="/" id="index_botnav01on">首页</a></div>
             </div>
         </div>
         <div class="index_botnavi">
             <div class="index_botnavic">
-                <div class="index_botnav02"><a href="ceshi.html" id="index_botnav02on">测试</a></div>
+                <div class="index_botnav02"><a href="ceshi.html">测试</a></div>
             </div>
         </div>
         <div class="index_botnavi">
@@ -93,16 +95,23 @@
             </div>
         </div>
     </div>
+
     <div style="display:none" id="antzone">
         <div class="dg_navwap">
-            <div class="dg_nav_itemwap" id="dg_nav_itemwapon"><a href="/">首页</a></div>
-            <div class="dg_nav_itemwap"><a href="/">关于</a></div>
-            <div class="dg_nav_itemwap"><a href="/">测试</a></div>
-            <div class="dg_nav_itemwap"><a href="/">资讯</a></div>
-            <div class="dg_nav_itemwap"><a href="/">联系</a></div>
-
+            <div class="dg_nav_itemwap">
+                <a href=/>首页</a>
+            </div>
+            <div class="dg_nav_itemwap">
+                <a href=/about/index.html>关于</a>
+            </div>
+            <div class="dg_nav_itemwap">
+                <a href=/testing/index.html>测试</a>
+            </div>
+            <div class="dg_nav_itemwap">
+                <a href=/news/index.html>资讯</a>
+            </div>
         </div>
-        <div class="close_btn"><img src="images/nav_close.png"/></div>
+        <div class="close_btn"><img src="/static/images/nav_close.png"/></div>
     </div>
 </div>
 </body>
@@ -115,11 +124,12 @@
             questions: [],
             state: '',
             minute: 0,
-            timeCost:0
+            timeCost: 0,
+            startTime:null
         },
-        computed:{
+        computed: {
             startTimeStr() {
-                return  new Date().format("yyyy-MM-dd hh:mm:ss");
+                return new Date().format("yyyy-MM-dd hh:mm:ss");
             }
         },
         mounted() {
@@ -131,33 +141,9 @@
             this.start();
         },
         methods: {
-            init() {
-                for (let question of this.questions) {
-                    // if (question.type === 'fill') {
-                    //     let content = question.content.replace(new RegExp(FILL, 'g'), '|?|' + FILL + '|?|')
-                    //     let arr = content.split('|?|')
-                    //     let result = []
-                    //     let blankIndex = 0
-                    //     for (let item of arr) {
-                    //         if (item === FILL) {
-                    //             result.push({
-                    //                 type: 'blank',
-                    //                 index: blankIndex,
-                    //                 length: question.answer[blankIndex].length
-                    //             })
-                    //             blankIndex++
-                    //         } else {
-                    //             result.push({
-                    //                 type: 'text',
-                    //                 text: item
-                    //             })
-                    //         }
-                    //     }
-                    //     question._content = result
-                    // }
-                }
-            },
+            init() {},
             start() {
+                this.startTime = new Date()
                 this.timer = setInterval(this.updateTime, 60 * 1000)
             },
             updateTime() {
@@ -181,9 +167,9 @@
             }
         },
         watch: {
-            questions(newV, oldV) {
-                console.log("监听", newV)
-            }
+            // questions(newV, oldV) {
+            //     console.log("监听", newV)
+            // }
         }
     })
 </script>

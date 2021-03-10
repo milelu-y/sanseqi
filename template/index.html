@@ -4,94 +4,99 @@
 
 <#include import('banner')/>
 <div id="app">
-<div class="index_title">
-    <div class="index_titlet"><span>测试类别</span>&nbsp;&nbsp;Test category</div>
-    <div class="index_titleb">自我测试，全面认清自己</div>
-</div>
-<div class="index_list">
-    <div class="index_listi" v-for="(item,index) in categoryList">
-            <div class="index_listip"><a href="ceshi.html"><img src="/static/images/listicon01.png"/></a></div>
-            <div class="index_listit"><a href="ceshi.html">{{item.name}}</a></div>
-            <div class="index_listii">psychological test</div>
+    <div class="index_title">
+        <div class="index_titlet"><span>测试类别</span>&nbsp;&nbsp;Test category</div>
+        <div class="index_titleb">自我测试，全面认清自己</div>
     </div>
-    <div class="div_clear"></div>
-</div>
-<div class="index_more"><a href="ceshi.html">更多测试</a></div>
-<div class="index_morebtn"><a href="ceshi.html"><img src="/static/images/more_icon.png"/></a></div>
-<div class="index_line"></div>
-<div class="index_title">
-    <div class="index_titlet"><span>行业资讯</span>&nbsp;&nbsp;Industry information</div>
-    <div class="index_titleb">他山之石，可以攻玉</div>
-</div>
-<div class="index_list2">
-    <div class="index_list2i">
-        <div class="index_list2it"><a href="news_view.html">教育部新消息：部分辅导机构将迎来“寒冬”，家长能省不
-            少钱了！</a></div>
-        <div class="index_list2ip"><a href="news_view.html"><img src="/static/images/new01.jpg"/></a></div>
-        <div class="index_list2itxt">
-            <div class="index_list2ii">中考和高考，足以改变人生方向，各个学校也是按照
-                分数，由高到低依次录取，若分数不够，很难被学校
-                录取，除非有一技之长，或在各大比赛中取得佳绩...
+    <div class="index_list">
+        <div class="index_listi" v-for="(item,index) in categoryList">
+            <div class="index_listip"><a :href="item.url"><img :src=item.cover!=null?item.cover.length?item.cover[0].url:'':'' /></a></div>
+            <div class="index_listit"><a :href="item.url">{{item.name}}</a></div>
+            <div class="index_listii">{{item.englishTitle}}</div>
+        </div>
+        <div class="div_clear"></div>
+    </div>
+    <div class="index_more"><a href="ceshi.html">更多测试</a></div>
+    <div class="index_morebtn"><a href="ceshi.html"><img src="/static/images/more_icon.png"/></a></div>
+    <div class="index_line"></div>
+    <div class="index_title">
+        <div class="index_titlet"><span>行业资讯</span>&nbsp;&nbsp;Industry information</div>
+        <div class="index_titleb">他山之石，可以攻玉</div>
+    </div>
+    <div class="index_list2">
+        <div class="index_list2i">
+            <div class="index_list2it"><a href="news_view.html">教育部新消息：部分辅导机构将迎来“寒冬”，家长能省不
+                少钱了！</a></div>
+            <div class="index_list2ip"><a href="news_view.html"><img src="/static/images/new01.jpg"/></a></div>
+            <div class="index_list2itxt">
+                <div class="index_list2ii">中考和高考，足以改变人生方向，各个学校也是按照
+                    分数，由高到低依次录取，若分数不够，很难被学校
+                    录取，除非有一技之长，或在各大比赛中取得佳绩...
+                </div>
+                <div class="index_list2ib"><span><img src="/static/images/listicon10.png"/>2021-02-22</span><span><img
+                        src="/static/images/listicon11.png"/>1926</span></div>
             </div>
-            <div class="index_list2ib"><span><img src="/static/images/listicon10.png"/>2021-02-22</span><span><img
-                    src="/static/images/listicon11.png"/>1926</span></div>
+        </div>
+        <div class="index_list2i">
+            <div class="index_list2it"><a href="news_view.html">教育部：高校不能规定男女生录取比例，学生满足条件就能
+                高考加分</a></div>
+            <div class="index_list2ip"><a href="news_view.html"><img src="/static/images/new02.jpg"/></a></div>
+            <div class="index_list2itxt">
+                <div class="index_list2ii">教育一直都是家长和老师关注的重点，不少家长为了
+                    让孩子不输在起跑线上，都会给他们报各种各样的补
+                    习班，这也是想让他们打好基础...
+                </div>
+                <div class="index_list2ib"><span><img src="/static/images/listicon10.png"/>2021-02-22</span><span><img
+                        src="/static/images/listicon11.png"/>1926</span></div>
+            </div>
+        </div>
+        <div class="index_list2i">
+            <div class="index_list2it"><a href="news_view.html">没了标化成绩，美国大学录取还能公平公正吗？</a></div>
+            <div class="index_list2ip"><a href="news_view.html"><img src="/static/images/new03.jpg"/></a></div>
+            <div class="index_list2itxt">
+                <div class="index_list2ii">每天，我们几乎都能看到一篇关注高等教育公平性的
+                    文章。这些文章大多使用“入学考试分数”作为分析
+                    公平录取的关键指标，这就好比说考试分数高......
+                </div>
+                <div class="index_list2ib"><span><img src="/static/images/listicon10.png"/>2021-02-22</span><span><img
+                        src="/static/images/listicon11.png"/>1926</span></div>
+            </div>
+        </div>
+        <div class="index_list2i">
+            <div class="index_list2it"><a href="news_view.html">考研成绩即将公布，忘记准考证号如何查询，成绩会通过短
+                信推送吗</a></div>
+            <div class="index_list2ip"><a href="news_view.html"><img src="/static/images/new04.jpg"/></a></div>
+            <div class="index_list2itxt">
+                <div class="index_list2ii">距离查询考研成绩的时间也越来越近了，各位同学只
+                    需要准备好自己的身份证和准考证号等待研招网放开
+                    系统就可以进行查询了...
+                </div>
+                <div class="index_list2ib"><span><img src="/static/images/listicon10.png"/>2021-02-22</span><span><img
+                        src="/static/images/listicon11.png"/>1926</span></div>
+            </div>
         </div>
     </div>
-    <div class="index_list2i">
-        <div class="index_list2it"><a href="news_view.html">教育部：高校不能规定男女生录取比例，学生满足条件就能
-            高考加分</a></div>
-        <div class="index_list2ip"><a href="news_view.html"><img src="/static/images/new02.jpg"/></a></div>
-        <div class="index_list2itxt">
-            <div class="index_list2ii">教育一直都是家长和老师关注的重点，不少家长为了
-                让孩子不输在起跑线上，都会给他们报各种各样的补
-                习班，这也是想让他们打好基础...
-            </div>
-            <div class="index_list2ib"><span><img src="/static/images/listicon10.png"/>2021-02-22</span><span><img
-                    src="/static/images/listicon11.png"/>1926</span></div>
-        </div>
-    </div>
-    <div class="index_list2i">
-        <div class="index_list2it"><a href="news_view.html">没了标化成绩，美国大学录取还能公平公正吗？</a></div>
-        <div class="index_list2ip"><a href="news_view.html"><img src="/static/images/new03.jpg"/></a></div>
-        <div class="index_list2itxt">
-            <div class="index_list2ii">每天，我们几乎都能看到一篇关注高等教育公平性的
-                文章。这些文章大多使用“入学考试分数”作为分析
-                公平录取的关键指标，这就好比说考试分数高......
-            </div>
-            <div class="index_list2ib"><span><img src="/static/images/listicon10.png"/>2021-02-22</span><span><img
-                    src="/static/images/listicon11.png"/>1926</span></div>
-        </div>
-    </div>
-    <div class="index_list2i">
-        <div class="index_list2it"><a href="news_view.html">考研成绩即将公布，忘记准考证号如何查询，成绩会通过短
-            信推送吗</a></div>
-        <div class="index_list2ip"><a href="news_view.html"><img src="/static/images/new04.jpg"/></a></div>
-        <div class="index_list2itxt">
-            <div class="index_list2ii">距离查询考研成绩的时间也越来越近了，各位同学只
-                需要准备好自己的身份证和准考证号等待研招网放开
-                系统就可以进行查询了...
-            </div>
-            <div class="index_list2ib"><span><img src="/static/images/listicon10.png"/>2021-02-22</span><span><img
-                    src="/static/images/listicon11.png"/>1926</span></div>
-        </div>
-    </div>
-</div>
-<div class="index_more"><a href="news.html">更多资讯</a></div>
-<div class="index_morebtn"><a href="news.html"><img src="/static/images/more_icon.png"/></a></div>
-<div class="index_line"></div>
-<#include import('hotline') />
-<#include '/fragment/footer_button.html'/>
+    <div class="index_more"><a href="news.html">更多资讯</a></div>
+    <div class="index_morebtn"><a href="news.html"><img src="/static/images/more_icon.png"/></a></div>
+    <div class="index_line"></div>
+    <#include import('hotline') />
+    <#include '/fragment/footer_button.html'/>
 </div>
 <script>
     var app = new Vue({
         el: '#app',
-        data:{
-                categoryList:[]
+        data: {
+            categoryList: []
         },
         mounted() {
             axios.get('http://localhost:7777/evaluate/category/outer/getCategoryList')
                 .then(response => {
                     this.categoryList = response.data.rows
+                    this.categoryList.forEach(function (row, index) {
+                        if (row.cover) {
+                            row.cover = JSON.parse(row.cover)
+                        }
+                    })
                     console.log(this.categoryList)
                 })
         }
