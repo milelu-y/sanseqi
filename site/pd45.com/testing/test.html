@@ -115,7 +115,7 @@
     </div>
     <div class="dialog" v-if="dialog">
         <div>
-            <label class="lab">姓名：</label> <input v-model="form.name"/>
+            <label class="lab">昵称：</label> <input v-model="form.nickname"/>
         </div>
         <div>
             <label class="lab">年龄：</label> <input v-model="form.age"/>
@@ -124,7 +124,7 @@
             <label class="lab">性别：</label> <input v-model="form.sex"/>
         </div>
         <div>
-            <label class="lab">联系方式：</label> <input v-model="form.phone"/>
+            <label class="lab">身高：</label> <input v-model="form.height"/>
         </div>
 
         <div class="footer">
@@ -155,13 +155,8 @@
             }
         },
         mounted() {
-            var categoryId = this.getQueryVariable("categoryId");
-            console.log(categoryId)
-            axios.get('https://mana.cn.utools.club/evaluate/subject/outer/getSubjectByCategoryId/' + categoryId)
-                .then(response => {
-                    this.questions = response.data.data
-                    this.question = this.questions[this.questionIndex]
-                })
+
+
             this.start();
         },
         methods: {
@@ -177,6 +172,12 @@
                 return (false);
             },
             init() {
+                var categoryId = this.getQueryVariable("categoryId");
+                axios.get('https://mana.cn.utools.club/evaluate/subject/outer/getSubjectByCategoryId/' + categoryId)
+                    .then(response => {
+                        this.questions = response.data.data
+                        this.question = this.questions[this.questionIndex]
+                    })
             },
             start() {
                 this.startTime = new Date()
@@ -216,9 +217,9 @@
             }
         },
         watch: {
-            // questions(newV, oldV) {
-            //     console.log("监听", newV)
-            // }
+            dialog(newV, oldV) {
+                init();
+            }
         }
     })
 </script>
