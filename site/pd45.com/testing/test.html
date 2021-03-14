@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link href="/static/css/default.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="/static/js/jquery.min.js"></script>
     <script src="/static/js/jquery.SuperSlide.2.1.1.js"></script>
     <script src="/static/js/dateFormat.js"></script>
@@ -46,7 +48,7 @@
             <div class="drop-down"><img src="/static/images/top_menu.png"/></div>
         </div>
     </div>
-    <div class="page_title"> 社交焦虑测试</div>
+    <div class="page_title"> {{categoryInfo.name}}</div>
     <div class="page_listt"><span>条目:<span style="color:red">{{questionIndex + 1}}</span>/{{questions.length}} 开始时间：{{startTimeStr}} 用时:{{timeCost}}</span>
     </div>
     <div class="page_listt">{{question.subject}}
@@ -114,23 +116,36 @@
         <div class="close_btn"><img src="/static/images/nav_close.png"/></div>
     </div>
     <div class="dialog" v-if="dialog">
-        <div>
-            <label class="lab">昵称：</label> <input v-model="form.nickname"/>
-        </div>
-        <div>
-            <label class="lab">年龄：</label> <input v-model="form.age"/>
-        </div>
-        <div>
-            <label class="lab">性别：</label> <input v-model="form.sex"/>
-        </div>
-        <div>
-            <label class="lab">身高：</label> <input v-model="form.height"/>
-        </div>
 
-        <div class="footer">
-            <button class="cancel" @click="cancel">取消</button>
-            <button class="confirm" @click="submit">确认</button>
+        <form>
+            <div class="alert alert-warning" role="alert">.请输入信息再继续.</div>
+            <div>
+                <input v-model="form.nickname" type="text" class="form-control" placeholder="请输入昵称">
+            </div>
+            <div>
+                <input v-model="form.age" type="text" class="form-control" placeholder="请输入年龄"/>
+            </div>
+            <div>
+                <input v-model="form.sex" type="text" class="form-control" placeholder="请输入性别"/>
+            </div>
+            <div>
+                <input v-model="form.height" type="text" class="form-control" placeholder="请输入身高"/>
+            </div>
+
+            <div class="footer">
+                <button type="button" class="btn btn-primary btn-lg btn-block" @click="submit">提交并开始测试</button>
+            </div>
+        </form>
+    </div>
+    <div class="popup" v-if="pay">
+        <p>优惠金额：<span style="color: red">9.9</span></p>
+        <div class="wxPay">
+            <!--            <img src="https://ae01.alicdn.com/kf/H484b5441fbd34ad2bee3c651bb1854e1K.jpg">-->
+            <div @click="wxPay">
+                微信支付
+            </div>
         </div>
+        <div>支付成功后，需返回当前浏览器查看结果！</div>
     </div>
 </div>
 </body>
@@ -147,7 +162,15 @@
             startTime: null,
             categoryId: null,
             dialog: false,
-            form: {}
+            pay: false,
+            form: {
+                nickname: null,
+                age: null,
+                sex: null,
+                height: null,
+                customerId: null
+            },
+            categoryInfo: {}
         },
         computed: {
             startTimeStr() {
@@ -155,8 +178,15 @@
             }
         },
         mounted() {
-
-
+            var categoryId = this.getQueryVariable("categoryId");
+            this.categoryId = categoryId
+            axios.get('https://mana.cn.utools.club/evaluate/category/outer/' + categoryId)
+                .then(response => {
+                    console.log(response)
+                    this.categoryInfo = response.data.data
+                })
+            this.dialog = true
+            this.form.customerId = Math.ceil(Math.random() * 10000) + new Date().getTime();
             this.start();
         },
         methods: {
@@ -172,8 +202,7 @@
                 return (false);
             },
             init() {
-                var categoryId = this.getQueryVariable("categoryId");
-                axios.get('https://mana.cn.utools.club/evaluate/subject/outer/getSubjectByCategoryId/' + categoryId)
+                axios.get('https://mana.cn.utools.club/evaluate/subject/outer/getSubjectByCategoryId/' + this.categoryId)
                     .then(response => {
                         this.questions = response.data.data
                         this.question = this.questions[this.questionIndex]
@@ -196,46 +225,82 @@
                 this.questions[this.questionIndex].userSelect = minute
             },
             submitAnswer() {
-                this.dialog = true;
                 let minute = 0;
                 this.questions.forEach(function (row, index) {
                     minute += row.userSelect;
                 })
-                console.log("minute", minute)
+                this.form.minute = minute
+                this.form.evalCategoryId = this.categoryId
+                this.pay = true;
             },
             submit() {
-                axios.post('https://mana.cn.utools.club/weChat/pay/h5/')
-                    .then(response => {
-                        console.log(response)
-                        window.location.href = response.data.data.mweb_url
-                    })
+                if (this.form.nickname === null) {
+                    alert("请输入昵称")
+                    return
+                }
+                if (this.form.age === null) {
+                    alert("请输入年龄")
+                    return
+                }
+                if (this.form.sex === null) {
+                    alert("请输入性别")
+                    return
+                }
+                if (this.form.height === null) {
+                    alert("请输入身高")
+                    return
+                }
+                this.dialog = false
+                this.init();
             },
             cancel() {
                 this.dialog = false;
                 this.form = {}
                 console.log(this.form)
+            },
+            /*微信支付*/
+            wxPay() {
+                axios.post('https://mana.cn.utools.club/weChat/pay/h5/', this.form)
+                    .then(response => {
+                        this.form.orderNum = response.data.data.orderNum
+                        console.log( response.data.data.orderNum)
+                        window.location.href = response.data.data.mweb_url
+                        setInterval(this.queryOrder, 2000);
+                    })
+            },
+            /**查询订单是否支付*/
+            queryOrder() {
+                console.log(this.form.customerId)
+                axios.post('https://mana.cn.utools.club/weChat/pay/queryOrder/', this.form)
+                    .then(response => {
+                        console.log(response)
+                        if (response.data.code===200){
+                            window.location.href = "https://milelu.test.utools.club/testing/result.html"
+                        }
+                    })
             }
         },
         watch: {
-            dialog(newV, oldV) {
-                init();
-            }
+            // dialog(newV, oldV) {
+            //     this.init();
+            // }
         }
     })
 </script>
 <style>
     .dialog {
-        background-color: rgba(255, 255, 000, 1);
-        width: 40%;
-        height: 150px;
+        background-color: #fff;
+        width: 370px;
         border-radius: 5px;
         z-index: 1; /*优先*/
         text-align: center;
         /* 实现对浏览器窗口的垂直居中 */
         position: fixed;
         left: 50%;
-        top: 50%;
         transform: translate(-50%, -50%);
+        top: 40%;
+        padding: 50px;
+        box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
     }
 
     /* 弹出框的提示文字部分 */
@@ -252,23 +317,30 @@
         flex-direction: row;
     }
 
-    /* 取消和确认按钮的设置 */
-    .confirm, .cancel {
-        outline: none;
-        background-color: white;
-        width: 50%;
+    .popup {
+        position: fixed;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 370px;
+        padding: 50px;
+        box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+        background: #fff;
     }
 
-    .confirm {
-        border-width: 1px 0px 0px 1px;
-        border-bottom-right-radius: 5px;
+    .popup .wxPay {
+        height: 60px;
+        border-color: #09BB07;
+        background-color: #09BB07;
+        border-radius: 3px;
+        text-align: center;
     }
 
-    .cancel {
-        border-width: 1px 0px 0px 0px;
-        border-bottom-left-radius: 5px;
+    .wxPay div {
+        font-size: 40px;
+        color: #f0f0f0;
+        /*background-image: url("https://lh3.googleusercontent.com/proxy/khPmj4f76d_3TXRiW_DmGp3sW0TkVtcNlzq_oZXjfWp6Gx3_rbaZSs-j_22BgNVEw1ktjSNWzpcWS3k-K18FF90LVJlIXOCdizSAcyjE5WeM4Sk6iFwL3HGRxxKSBm6pxboMWSJ669TE");*/
     }
-
 
 </style>
 </html>
