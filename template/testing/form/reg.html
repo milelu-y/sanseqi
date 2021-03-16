@@ -1,0 +1,187 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href="/static/css/default.css" rel="stylesheet" type="text/css"/>
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/jquery.SuperSlide.2.1.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>夏之阳</title>
+    <script>
+        $(document).ready(function () {
+            $(".drop-down").click(function () {
+                var div = $('#antzone');
+                if (div.is(':hidden')) {
+                    div.slideDown();
+                } else {
+                    div.slideUp();
+                }
+            });
+
+            $(".close_btn").click(function () {
+                var div = $('#antzone');
+                if (div.is(':hidden')) {
+                    div.slideDown();
+                } else {
+                    div.slideUp();
+                }
+            });
+        })
+    </script>
+</head>
+<body>
+<div class="index_topspace"></div>
+<div id="app">
+    <div class="top_nav">
+        <div class="top_navc">
+            <div class="top_tell"><a href="tel:0731 8080 6060"><img src="/static/images/top_tell.png"/></a></div>
+            <div class="top_logo"><a href="/"><img src="/static/images/top_logo.png"/></a></div>
+            <div class="drop-down"><img src="/static/images/top_menu.png"/></div>
+        </div>
+    </div>
+    <div class="page_title">{{categoryInfo.name}}-测试简介</div>
+    <div style="padding-left:20px;font-size: 14px;padding-top: 5px">
+        {{categoryInfo.description}}
+    </div>
+    <div class="page_title"> 信息输入</div>
+
+    <div class="xxsr_info">请输入信息再继续！</div>
+
+    <form class="xxsr_form">
+        <input v-model="form.nickname" type="text" class="xxsr_input" placeholder="姓名">
+        <select v-model="form.sex" class="xxsr_input2">
+            <option value="0">男</option>
+            <option value="1">女</option>
+        </select>
+        <input v-model="form.age" type="number" class="xxsr_input" placeholder="年龄">
+        <input v-model="form.height" type="number" class="xxsr_input" placeholder="体重">
+        <input @click="submit" class="xxsr_input3" value="提交信息并测试">
+    </form>
+
+
+    <div class="index_line"></div>
+    <div class="index_list3">
+        <div class="index_bottel"> 咨询热线<br>
+            <span><a href="tel:0731 8080 6060">0731 8080 6060</a></span></div>
+        <div class="index_botcode"><img src="/static/images/code.png"/><img src="/static/images/code.png"/><img
+                src="/static/images/code.png"/>
+        </div>
+        <div class="index_botcopy">Copyright © 2021夏之阳网络科技 版权所有<br>
+            湘ICP备123456789号
+        </div>
+        <div class="index_botspace"></div>
+    </div>
+    <div class="index_botnav">
+        <div class="index_botnavi">
+            <div class="index_botnavic">
+                <div class="index_botnav01"><a href="/">首页</a></div>
+            </div>
+        </div>
+        <div class="index_botnavi">
+            <div class="index_botnavic">
+                <div class="index_botnav02"><a href="/test">测试</a></div>
+            </div>
+        </div>
+        <div class="index_botnavi">
+            <div class="index_botnavic">
+                <div class="index_botnav03"><a href="/news">资讯</a></div>
+            </div>
+        </div>
+        <div class="index_botnavi">
+            <div class="index_botnavic">
+                <div class="index_botnav04"><a href="/about" id="index_botnav04on">关于</a></div>
+            </div>
+        </div>
+    </div>
+    <div style="display:none" id="antzone">
+        <div class="dg_navwap">
+            <div class="dg_nav_itemwap" id="dg_nav_itemwapon"><a href="/">首页</a></div>
+            <div class="dg_nav_itemwap"><a href="/">关于</a></div>
+            <div class="dg_nav_itemwap"><a href="/">测试</a></div>
+            <div class="dg_nav_itemwap"><a href="/">资讯</a></div>
+            <div class="dg_nav_itemwap"><a href="/">联系</a></div>
+
+        </div>
+        <div class="close_btn"><img src="/static/images/nav_close.png"/></div>
+    </div>
+</div>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            form: {
+                sex: 0,
+                nickname: null,
+                age: null,
+                height: null
+            },
+            categoryId:null,
+            categoryInfo:{}
+        },
+        mounted(){
+            var categoryId = this.getQueryVariable("categoryId");
+            this.categoryId = categoryId
+            axios.get('https://mana.cn.utools.club/evaluate/category/outer/' + this.categoryId)
+                .then(response => {
+                    if (response.data.code===200&&response.data.data){
+                        this.categoryInfo=response.data.data
+                    }
+
+                })
+        },
+        methods: {
+            getQueryVariable(variable) {
+                var query = window.location.search.substring(1);
+                var vars = query.split("&");
+                for (var i = 0; i < vars.length; i++) {
+                    var pair = vars[i].split("=");
+                    if (pair[0] == variable) {
+                        return decodeURI(pair[1]);
+                    }
+                }
+                return (false);
+            },
+            submit() {
+                if (this.form.nickname === null) {
+                    alert("请输入昵称")
+                    return
+                }
+                if (this.form.age === null) {
+                    alert("请输入年龄")
+                    return
+                } else if (!this.ageValidate(null, this.form.age)) {
+                    alert("请输入合法年龄")
+                    return
+                }
+                if (this.form.sex === null) {
+                    alert("请输入性别")
+                    return
+                }
+                if (this.form.height === null) {
+                    alert("请输入体重")
+                    return
+                } else if (!this.Validate(null, this.form.height)) {
+                    alert("请输入合法体重")
+                    return
+                }
+                window.location.href="/testing/test.html?categoryId="+this.categoryId+'&nickname='+this.form.nickname
+                +'&age='+this.form.age+'&sex='+this.form.sex+'&height='+this.form.height
+            },
+            ageValidate(rule, value, callback) {
+                let reg = /^(?:[1-9][0-9]?|1[01][0-9]|120)$/;//年龄是1-120之间有效
+                return reg.test(value);
+            },
+            Validate(rule, value, callback) {
+                let reg = /^\d{1,3}$/;//是否是数字
+                return reg.test(value);
+            },
+        }
+    })
+</script>
+</body>
+</html>

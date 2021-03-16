@@ -10,8 +10,8 @@
     </div>
     <div class="index_list">
         <div class="index_listi" v-for="(item,index) in categoryList">
-            <div class="index_listip"><a :href="item.url+'?categoryId='+item.id"><img :src=item.cover!=null?item.cover.length?item.cover[0].url:'':'' /></a></div>
-            <div class="index_listit"><a :href="item.url+'?categoryId='+item.id">{{item.name}}</a></div>
+            <div class="index_listip"><a :href="'/testing/form/reg.html?categoryId='+item.id"><img :src=item.cover!=null?item.cover.length?item.cover[0].url:'':'' /></a></div>
+            <div class="index_listit"><a :href="'/testing/form/reg.html?categoryId='+item.id">{{item.name}}</a></div>
             <div class="index_listii">{{item.englishTitle}}</div>
         </div>
         <div class="div_clear"></div>
@@ -54,7 +54,7 @@
             categoryList: []
         },
         mounted() {
-            axios.get('http://localhost:7777/evaluate/category/outer/getCategoryList')
+            axios.get('https://mana.cn.utools.club/evaluate/category/outer/getCategoryList')
                 .then(response => {
                     this.categoryList = response.data.rows
                     this.categoryList.forEach(function (row, index) {
